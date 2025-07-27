@@ -1,0 +1,10 @@
+name: Commander
+author: Finnbar
+api: 5.0.0
+main: Finnbar\Commander\Main
+version: 1.0.0
+
+permissions:
+  commander:
+    default: true
+    description: is this working?

@@ -1,0 +1,19 @@
+{
+    "name": "finnbar/commander",
+    "require": {
+        "pocketmine/pocketmine-mp": "^5.10",
+        "dktapps/pmforms": "dev-master"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Finnbar\\commander\\": "src/"
+        }
+    },
+    "virion": {
+        "spec": "3.1",
+        "namespace-root": "Finnbar\\Commander"
+    }
+}
