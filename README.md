@@ -48,6 +48,7 @@ As explained in the comment above, parsed depending on their types, in the order
 The `TrailingString` class should be used as a parameter type when you want to allow spaces in a string - for example in the /say command. Since it allows spaces, it must be the last parameter, otherwise parameters after it will not be usable.
 ### Automatic UI
 Though this is primarily meant for internal tools e.g. config editing, there can be an automatically generated form UI. Just add `implements UICommand`. Then, when the command is used with no arguments, the user will be asked to provide them in a form. UICommand is just a marker interface, it doesn't have any functions that you need to implement.
+
 TODO:
     - Track if UI is being used in CommandContext
     - Add displayText function that will send a message when used from command mode and send an empty MenuForm when used from UI mode
