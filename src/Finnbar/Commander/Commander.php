@@ -273,7 +273,7 @@ class Commander
         return $usage;
     }
 
-    private static function getUnqualifiedNameFromReflectionType(ReflectionType $type): ?string
+    public static function getUnqualifiedNameFromReflectionType(ReflectionType $type): ?string
     {
         if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
             $fqcn = $type->getName();

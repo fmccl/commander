@@ -5,8 +5,11 @@ namespace Finnbar\Commander;
 use Exception;
 use Finnbar\Commander\arg\Subcommand;
 use Finnbar\Commander\Error\ArgumentParsingError;
+use Finnbar\Commander\ui\CommanderUI;
+use Finnbar\Commander\ui\UICommand;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 use ReflectionClass;
 use ReflectionIntersectionType;
@@ -30,6 +33,16 @@ class CommanderPMCommand extends Command
 
         if ($parentCommand === null) {
             $parentCommand = $command::class;
+        }
+
+        if (
+            $ctx->sender instanceof Player &&
+            $command instanceof UICommand &&
+            count($args) === 0 &&
+            0 !== count(array_filter($params, fn($p) => !$p->isOptional()),)
+        ) {
+            CommanderUI::open($command, $ctx);
+            return;
         }
 
         $parsedArgs = [];
@@ -79,7 +92,7 @@ class CommanderPMCommand extends Command
                 foreach ($command::{"getSubcommands"}() as $subcommand) {
                     /** @var class-string<CommanderCommand> $subcommand */
                     if ($subcommand::getName() === $args[$curArg]) {
-                        $parsedArgs[] = new Subcommand($subcommand::getName(), array_slice($args, $curArg + 1), $parentCommand);
+                        $parsedArgs[] = new Subcommand($subcommand, array_slice($args, $curArg + 1), $parentCommand);
                         $curArg++;
                         $found = true;
                         break;

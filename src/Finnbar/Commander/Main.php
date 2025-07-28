@@ -3,6 +3,7 @@
 namespace Finnbar\Commander;
 
 use Finnbar\Commander\arg\Subcommand;
+use Finnbar\Commander\ui\UICommand;
 use pocketmine\item\Item;
 use pocketmine\plugin\PluginBase;
 
@@ -16,7 +17,7 @@ class Main extends PluginBase
     }
 }
 
-class MyGiveCommand implements CommanderCommand
+class MyGiveCommand implements CommanderCommand, UICommand
 {
     public function __construct(private CommandContext $ctx) {}
 
@@ -34,7 +35,8 @@ class MyGiveCommand implements CommanderCommand
 
     public function execute(Item $a, Subcommand $b,): void
     {
-        if ($b->name === "foo") {
+        var_dump($a, $b);
+        if ($b->name === AsSubcommand::class) {
             $b->execute($this->ctx, new AsSubcommand($this->ctx, $a));
         }
     }
@@ -55,7 +57,7 @@ class MyGiveCommand implements CommanderCommand
 
 class AsSubcommand implements CommanderCommand
 {
-    public function __construct(private CommandContext $ctx, Item $a) {}
+    public function __construct(private CommandContext $ctx, private Item $a) {}
 
     public static function getDescription(): string
     {
@@ -69,7 +71,10 @@ class AsSubcommand implements CommanderCommand
         ];
     }
 
-    public function execute(int $b): void {}
+    public function execute(int $b): void
+    {
+        $this->ctx->sender->sendMessage("{$b} {$this->a->getName()}");
+    }
 
 
     public static function getName(): string
