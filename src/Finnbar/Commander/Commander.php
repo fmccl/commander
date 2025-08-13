@@ -250,7 +250,7 @@ class Commander
                         $indentation += 2;
                         $usage .= TextFormat::RED . str_repeat(" ", $indentation) . $subcommand::getName() . " " . Commander::genParams($subcommand, $doneSubcommands, $indentation);
                         $indentation -= 2;
-                        $usage .=  TextFormat::DARK_GRAY . str_repeat(" ", $indentation) . $command::getDescription() . "\n";
+                        $usage .=  TextFormat::DARK_GRAY . str_repeat(" ", $indentation) . $subcommand::getDescription() . "\n";
                     }
                     continue;
                 }
