@@ -12,8 +12,10 @@
             "Finnbar\\commander\\": "src/"
         }
     },
-    "virion": {
-        "spec": "3.1",
-        "namespace-root": "Finnbar\\Commander"
+    "extra": {
+        "virion": {
+            "spec": "3.1",
+            "namespace-root": "Finnbar\\Commander"
+        }
     }
 }

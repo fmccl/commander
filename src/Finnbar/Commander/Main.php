@@ -35,7 +35,6 @@ class MyGiveCommand implements CommanderCommand, UICommand
 
     public function execute(Item $a, Subcommand $b,): void
     {
-        var_dump($a, $b);
         if ($b->name === AsSubcommand::class) {
             $b->execute($this->ctx, new AsSubcommand($this->ctx, $a));
         }

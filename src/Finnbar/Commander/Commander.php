@@ -161,7 +161,6 @@ class Commander
             foreach ($command::{"getSubcommands"}() as $subcommand) {
 
                 if (in_array($subcommand, $doneSubcommands)) {
-                    var_dump("STOP HERE!");
                     continue;
                 }
 
@@ -174,14 +173,11 @@ class Commander
                     }
                 }
                 if (!$canUse) {
-                    var_dump("STOP THERE!");
                     continue;
                 }
                 $cmdData = new CommandData($subcommand::getName(), $subcommand::getDescription(), $commandData->flags, $commandData->permission, null, [], []);
                 self::addOverloads($subcommand, $recipient, $cmdData, [...$doneSubcommands, $command]);
-                var_dump($cmdData->overloads);
                 foreach ($cmdData->overloads as $subOverload) {
-                    var_dump("SUB OVERLOAD!");
                     $commandData->overloads[] = new CommandOverload(false, [
                         ...$overloadParams,
                         CommandParameter::enum(
